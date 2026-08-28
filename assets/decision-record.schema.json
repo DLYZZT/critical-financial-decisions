@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/critical-financial-decisions/decision-record.schema.json",
+  "title": "Critical Financial Decision Record",
+  "type": "object",
+  "required": [
+    "decision",
+    "verdict",
+    "key_facts",
+    "financial_mode",
+    "affordability",
+    "dimensions",
+    "implementation"
+  ],
+  "properties": {
+    "decision": {
+      "type": "object",
+      "required": [
+        "summary",
+        "amount",
+        "currency",
+        "deadline",
+        "payer",
+        "beneficiary",
+        "claimed_nature"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "amount": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deadline": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "payer": {
+          "type": "string"
+        },
+        "beneficiary": {
+          "type": "string"
+        },
+        "account_holder": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "claimed_nature": {
+          "enum": [
+            "purchase",
+            "gift",
+            "loan",
+            "investment",
+            "guarantee",
+            "expense",
+            "medical",
+            "family_property",
+            "trust_escrow",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "expected_result": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "verdict": {
+      "type": "object",
+      "required": [
+        "status",
+        "reason",
+        "confidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "approve",
+            "reject",
+            "conditional",
+            "pause"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "key_facts": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": [
+          "fact",
+          "evidence_status"
+        ],
+        "properties": {
+          "fact": {
+            "type": "string"
+          },
+          "evidence_status": {
+            "enum": [
+              "verified",
+              "user_reported",
+              "conflicted",
+              "unknown"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "financial_mode": {
+      "type": "object",
+      "required": [
+        "mode",
+        "financial_materiality",
+        "structural_materiality",
+        "rationale"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "F0",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        "financial_materiality": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "structural_materiality": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    },
+    "affordability": {
+      "type": "object",
+      "required": [
+        "can_afford",
+        "should_proceed"
+      ],
+      "properties": {
+        "can_afford": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "should_proceed": {
+          "type": "boolean"
+        },
+        "post_payment_liquidity": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "cash_runway_months": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "income_burden": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "liquidity_impact": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "net_worth_impact": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "total_counterparty_exposure": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "hard_stops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "trigger",
+          "present",
+          "control"
+        ],
+        "properties": {
+          "trigger": {
+            "type": "string"
+          },
+          "present": {
+            "type": "boolean"
+          },
+          "control": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "analysis",
+          "decision_effect"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "cashflow_net_worth",
+              "legal_tax_structure",
+              "counterparty_information",
+              "relationship_incentives",
+              "irreversibility_optionality",
+              "concentration_precedent",
+              "governance_operations_reputation"
+            ]
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "decision_effect": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "worst_cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "scenario",
+          "financial_consequence",
+          "nonfinancial_consequence",
+          "reversibility"
+        ],
+        "properties": {
+          "scenario": {
+            "type": "string"
+          },
+          "financial_consequence": {
+            "type": "string"
+          },
+          "nonfinancial_consequence": {
+            "type": "string"
+          },
+          "reversibility": {
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "none"
+            ]
+          }
+        }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "required": [
+        "action",
+        "next_24_hours",
+        "professional_handoff"
+      ],
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "amount_cap": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "tranches": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "triggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "account_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "custodian": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approvers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cooling_off_period": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refund_rule": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next_24_hours": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "professional_handoff": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "excluded_considerations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

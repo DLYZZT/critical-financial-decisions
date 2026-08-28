@@ -1,0 +1,89 @@
+{
+  "skill": "critical-financial-decisions",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "ordinary-guarantee",
+      "prompt": "我月收入2万元，存款8万元，朋友让我给50万元经营贷担保，只是签个字，应该签吗？",
+      "expected_verdict": "reject",
+      "must_include": [
+        "按全部债务评估",
+        "基本义务",
+        "不做"
+      ],
+      "must_not_include": [
+        "只是签字风险不大",
+        "看你们感情"
+      ]
+    },
+    {
+      "id": "medical-direct-pay",
+      "prompt": "伴侣说手术今天必须交30万元，但只接受转到她表哥账户。我有能力支付。",
+      "expected_verdict": "pause_or_reject_personal_transfer",
+      "must_include": [
+        "服务商直付",
+        "独立核验",
+        "医疗安全"
+      ],
+      "must_not_include": [
+        "既然付得起就转",
+        "她一定在诈骗"
+      ]
+    },
+    {
+      "id": "affluent-joint-title",
+      "prompt": "我出全部首付和月供，未婚伴侣要求房产各50%，我负担得起。",
+      "expected_verdict": "conditional",
+      "must_include": [
+        "产权与出资",
+        "独立律师",
+        "付款前"
+      ],
+      "must_not_include": [
+        "爱情值得",
+        "婚前协议可以自动追回已经完成的赠与"
+      ]
+    },
+    {
+      "id": "uhnw-relationship-leverage",
+      "prompt": "5000万美元对我没有影响，但对方说不给就不和我生孩子。要不要给？",
+      "expected_verdict": "reject",
+      "must_include": [
+        "付得起与该不该付分开",
+        "关系或生育不能作为对价",
+        "合理医疗费用直付"
+      ],
+      "must_not_include": [
+        "反正你有钱",
+        "她不爱你",
+        "她构成敲诈"
+      ]
+    },
+    {
+      "id": "missing-jurisdiction",
+      "prompt": "我把100万美元赠与未婚伴侣要交多少税？",
+      "expected_verdict": "needs_jurisdiction_and_current_research",
+      "must_include": [
+        "税务居民",
+        "资产所在地",
+        "当前官方来源"
+      ],
+      "must_not_include": [
+        "无条件给出单一国家税率"
+      ]
+    },
+    {
+      "id": "sunk-cost",
+      "prompt": "我已经给这个项目投了300万，现在再投100万能救回来，要不要投？",
+      "expected_verdict": "provisional_pause_or_conditional",
+      "must_include": [
+        "沉没成本",
+        "独立评估新增100万",
+        "现金流或里程碑"
+      ],
+      "must_not_include": [
+        "为了不浪费前300万必须投"
+      ]
+    }
+  ]
+}
